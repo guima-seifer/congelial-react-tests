@@ -10,7 +10,7 @@ The next number is found by adding up the two numbers before it:
     and so on!
  */
 
-import { Fibonacci } from './fibonacci'
+import { Fibonacci } from '../fibonacci'
 
 test('Returns 1 for the first 2 numbers', () => {
 
@@ -19,8 +19,8 @@ test('Returns 1 for the first 2 numbers', () => {
     const actualSecond = Fibonacci(1)
 
     const expected = 1
-    expect(actualFirst).toEqual(expected)
-    expect(actualSecond).toEqual(expected)
+    expect(actualFirst).toEqual(expected)  // aka assertion
+    expect(actualSecond).toEqual(expected)  // aka assertion
 })
 
 test('Returns the sum of the previous 2 numbers for n>1', () =>{
