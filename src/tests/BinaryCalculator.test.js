@@ -1,5 +1,5 @@
 //role-based testing
-import { cleanup, render, screen } from '@testing-library/react'
+import { cleanup, render, screen, fireEvent } from '@testing-library/react'
 import { BinaryCalculator } from '../BinaryCalculator'
 
 test('Displays the correct number of buttons according to the "numberOfButtons prop', () => {
@@ -32,4 +32,14 @@ test('Starting sum is 0', () => {
   const sumHeading = screen.getByRole('heading')
   expect(sumHeading).toHaveTextContent(/total is: 0/i)
 
+})
+
+test('Button state changes to 1 after it´s clicked', () => {
+  render(<BinaryCalculator numberOfButtons={5} />)
+
+  const firstButton = screen.getAllByRole('button')[0]
+  expect(firstButton).toHaveTextContent('0')
+
+  fireEvent.click(firstButton)
+  expect(firstButton).toHaveTextContent('1')
 })
