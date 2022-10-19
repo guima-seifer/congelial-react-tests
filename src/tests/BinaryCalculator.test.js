@@ -43,3 +43,13 @@ test('Button state changes to 1 after it´s clicked', () => {
   fireEvent.click(firstButton)
   expect(firstButton).toHaveTextContent('1')
 })
+
+test('Button state changes to 0 after it´s clicked', () => {
+  render(<BinaryCalculator numberOfButtons={5} />)
+
+  const firstButton = screen.getAllByRole('button')[0]
+  expect(firstButton).toHaveTextContent('1')
+
+  fireEvent.click(firstButton)
+  expect(firstButton).toHaveTextContent('0')
+})
