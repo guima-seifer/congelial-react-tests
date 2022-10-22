@@ -21,7 +21,7 @@ test('All buttons start off with text 0', () => {
 
   const buttons = screen.getAllByRole('button')
 
-  buttons.forEach(button => {
+  buttons.forEach((button) => {
     expect(button).toHaveTextContent('0')
   })
 })
@@ -31,7 +31,6 @@ test('Starting sum is 0', () => {
 
   const sumHeading = screen.getByRole('heading')
   expect(sumHeading).toHaveTextContent(/total is: 0/i)
-
 })
 
 test('Button state changes to "1" after it´s clicked', () => {
@@ -53,4 +52,34 @@ test('Button state changes to "0" after it´s clicked twice', () => {
 
   fireEvent.click(firstButton)
   expect(firstButton).toHaveTextContent('0')
+})
+
+test('Total sum when all 7 button are on is 127', () =>{
+render(<BinaryCalculator numberOfButtons={7} />)
+
+const buttons = screen.getAllByRole('button')
+buttons.forEach(button => fireEvent.click(button))
+
+const sumHeading = screen.getByRole('heading')
+expect(sumHeading).toHaveTextContent(/total is: 127/i)
+})
+
+test('Total sum when all 3 buttons are on is 7', () => {
+  render(<BinaryCalculator numberOfButtons={3} />)
+
+const buttons = screen.getAllByRole('button')
+buttons.forEach(button => fireEvent.click(button))
+
+const sumHeading = screen.getByRole('heading')
+expect(sumHeading).toHaveTextContent(/total is: 7/i)
+})
+
+test('Least significant digit is on the right-hand side', () => {
+  render(<BinaryCalculator numberOfButtons={7} />)
+
+  const rightMostButton = screen.getAllByRole('button')[6]
+  fireEvent.click(rightMostButton)
+
+  const sumHeading = screen.getByRole('heading')
+  expect(sumHeading).toHaveTextContent(/total is: 1/i)
 })
